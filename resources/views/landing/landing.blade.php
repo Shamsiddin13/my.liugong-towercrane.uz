@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=480">
     <title><?php echo htmlspecialchars($landing->title)?></title>
-    <base href="{{ url('http://127.0.0.1:8000/l/') }}">
+    <base href="{{ url('https://my.liugong-towercrane.uz/l/') }}">
     <link rel="stylesheet" href="{{ asset('l/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('l/Montserrat.css') }}">
     <link rel="stylesheet" href="{{ asset('l/styles.css') }}">
@@ -205,7 +205,7 @@
     </style>
 
     <!-- Meta Pixel Code -->
-    @if (!empty($landing->landingPost->pixel_id))
+    @if (!empty($landingPost->pixel_id))
         <script>
             !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
                 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -216,12 +216,12 @@
                 s.parentNode.insertBefore(t,s)
             }(window,document,'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '<?php echo htmlspecialchars($landing->landingPost->pixel_id)?>');
+            fbq('init', '<?php echo htmlspecialchars($landingPost->pixel_id)?>');
             fbq('track', 'PageView');
         </script>
         <noscript>
             <img height="1" width="1" style="display:none"
-                 src="https://www.facebook.com/tr?id=<?php echo htmlspecialchars($landing->landingPost->pixel_id)?>&ev=PageView&noscript=1" />
+                 src="https://www.facebook.com/tr?id=<?php echo htmlspecialchars($landingPost->pixel_id)?>&ev=PageView&noscript=1" />
         </noscript>
     @endif
     <!-- End Meta Pixel Code -->
@@ -234,7 +234,7 @@
         <h1 class="main_title"><?php echo htmlspecialchars($landing->title)?></h1>
         <div class="info_block">
             <p class="subtitle"><?php echo htmlspecialchars($landing->subtitle) ?></p>
-            <img src="<?php echo htmlspecialchars($landing->img1) ?>" alt="Product Image">
+            <img src="<?php echo htmlspecialchars(App\Models\Product::getImageUrl($landing->img1)) ?>" alt="Product Image">
         </div>
         <div class="price_block">
             <div class="price_item old">
@@ -270,7 +270,7 @@
                     @foreach ($images as $key => $image)
                         @if (!empty($landing->$image))
                             <div class="benefit_item">
-                                <img src="<?php echo htmlspecialchars($landing->$image) ?>" alt="Benefit {{ $key + 1 }}">
+                                <img src="<?php echo htmlspecialchars(App\Models\Product::getImageUrl($landing->$image)) ?>" alt="Benefit {{ $key + 1 }}">
                             </div>
                         @endif
                     @endforeach
@@ -315,7 +315,7 @@
 
         <form class="main-order-form order_form" id="order1" action="{{ route('landing.submit') }}" method="post">
             @csrf
-            <input type="hidden" name="pixel_id" value="<?php echo htmlspecialchars($landing->landingPost->pixel_id ?? ''); ?>">
+            <input type="hidden" name="pixel_id" value="<?php echo htmlspecialchars($landingPost->pixel_id ?? ''); ?>">
 
             <select name="region" class="field" required title="'Ҳудудни танланг' bo'sh bo'lмаслиги керак.">
                 <option disabled selected hidden>Ҳудудни танланг</option>

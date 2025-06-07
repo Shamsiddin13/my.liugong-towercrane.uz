@@ -40,7 +40,7 @@ class LandingController extends Controller
 
         if (!$landing) {
             $landing = Landing::query()->where('sku', $link)->first();
-            $product = $landing->product();
+            $product = $landing->product ?? null;
         }
 
         // If landing is still not found, abort with a 404 error

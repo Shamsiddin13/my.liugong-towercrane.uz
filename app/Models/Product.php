@@ -34,6 +34,20 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+    
+    public static function getImageUrl($img)
+    {
+        $defaultImg = 'https://my.liugong-towercrane.uz/storage/products/No_Image_Available.jpg';
+    
+        if (is_null($img) || empty($img)) {
+            return $defaultImg;
+        }
+    
+        $url = 'https://my.liugong-towercrane.uz/storage/' . $img;
+    
+        return $url;
+    }
+    
 
     protected static function boot()
     {
